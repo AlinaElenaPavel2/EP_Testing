@@ -30,6 +30,8 @@ public class TicketsPage {
     @FindBy(xpath = "/html/body/a[1]/button")
     private WebElement cancel;
 
+
+
     public TicketsPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
@@ -47,7 +49,7 @@ public class TicketsPage {
         return locuriRezervarte.getText();
     }
 
-    public void tableSize(String rand, String loc) throws Exception {
+    public void select(String rand, String loc) throws Exception {
         int randInt=Integer.parseInt(rand)+1;
         int locInt=Integer.parseInt(loc);
         int rows = driver.findElements(By.xpath("//*[@id=\"locuri\"]/tbody/tr")).size() - 1;
@@ -63,11 +65,9 @@ public class TicketsPage {
         }
         String xpathLoc = "//*[@id=\"locuri\"]/tbody/tr[" + randInt + "]/td[" + loc + "]";
         WebElement webElement = driver.findElement(By.xpath(xpathLoc));
-        if (webElement.getAttribute("style").equals("background-color: mediumseagreen;")) {
-            System.out.println("element found and is not ocupied");
             Thread.sleep(2000);
             webElement.click();
-        }
+
 
     }
 
@@ -86,5 +86,10 @@ public class TicketsPage {
     {
         cancel.click();
         return new ConcertsPage(driver);
+    }
+
+    public String selected()
+    {
+        return selected.getText();
     }
 }

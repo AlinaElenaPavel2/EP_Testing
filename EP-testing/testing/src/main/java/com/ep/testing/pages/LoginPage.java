@@ -11,29 +11,37 @@ public class LoginPage {
 
 
     @FindBy(id = "email")
-    public WebElement emailField;
+    private WebElement emailField;
 
     @FindBy(id = "password")
-    protected WebElement passwordField;
+    private WebElement passwordField;
 
     @FindBy(xpath = "/html/body/form/div/input[3]")
-    protected WebElement logInButton;
+    private WebElement logInButton;
 
     @FindBy(xpath = "/html/body/a/button")
-    protected WebElement registerButton;
+    private WebElement registerButton;
 
     @FindBy(tagName = "h1")
-    protected WebElement title;
+    private WebElement title;
+
+    @FindBy(xpath = "/html/body/form/div/h3")
+    private WebElement errorMessage;
+
 
     public LoginPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
 
-    public HomePage fllInCredentials(String email, String password) throws InterruptedException {
+    public LoginPage fllInCredentials(String email, String password) throws InterruptedException {
         emailField.sendKeys(email);
         passwordField.sendKeys(password);
         Thread.sleep(2000);
+        return new LoginPage(driver);
+    }
+
+    public HomePage logIn() throws InterruptedException {
         logInButton.click();
         Thread.sleep(2000);
         return new HomePage(driver);
@@ -49,5 +57,8 @@ public class LoginPage {
     {
         return title.getText();
     }
-
+    public String getErrorMessage()
+    {
+        return errorMessage.getText();
+    }
 }

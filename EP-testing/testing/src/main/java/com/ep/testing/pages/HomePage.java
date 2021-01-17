@@ -13,7 +13,7 @@ public class HomePage {
     @FindBy(xpath = "//*[@id=\"h2\"]")
     private WebElement homePageTitle;
 
-    @FindBy(className = "button1")
+    @FindBy(xpath = "/html/body/div[1]/div[1]/div/button[1]")
     private WebElement buyTicketsButton;
 
     @FindBy(className = "button2")

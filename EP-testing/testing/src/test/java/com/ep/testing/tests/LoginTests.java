@@ -16,13 +16,13 @@ public class LoginTests {
     private RegisterPage registerPage;
     private static WebDriver driver;
     private static String VALID_EMAIL = "alina_pavel98@yahoo.com";
-    private static String VALID_PASSWORD = "khffkhghk";
+    private static String VALID_PASSWORD = "777777";
     private static String HOME_PAGE_TITLE = "Get your tickets";
     private static String REGISTER_PAGE_TITLE = "Register";
 
-    private static String INVALID_EMAIL = "alina_pavel98@yahoo.com";
+    private static String INVALID_EMAIL = "alina_pavel98@yahoo.comm";
     private static String INVALID_PASSWORD = "khffkhghk";
-
+    private static String ERROR_MESSAGE="Wrong email!";
 
     @Before
     public void logInTheApplication() throws InterruptedException {
@@ -42,15 +42,16 @@ public class LoginTests {
 
     @Test
     public void loginWithValidCredentials() throws InterruptedException {
-        homePage = loginPage.fllInCredentials(VALID_EMAIL, VALID_PASSWORD);
+        loginPage.fllInCredentials(VALID_EMAIL, VALID_PASSWORD);
+        homePage=loginPage.logIn();
         Assert.assertEquals("The log in was not succefully!", HOME_PAGE_TITLE, homePage.getTitlePage());
     }
 
     @Test
     public void loginWithInvalidCredentials() throws InterruptedException {
-        homePage = loginPage.fllInCredentials(INVALID_EMAIL, INVALID_PASSWORD);
-        //get the error mesagge displayed
-        Assert.assertEquals("The log in was succefully!", HOME_PAGE_TITLE, homePage.getTitlePage());
+        loginPage.fllInCredentials(INVALID_EMAIL, VALID_PASSWORD);
+        loginPage.logIn();
+        Assert.assertEquals("The log in was succefully!", ERROR_MESSAGE, loginPage.getErrorMessage());
     }
 
     @Test

@@ -35,15 +35,18 @@ public class RegisterPage {
     }
 
 
-    public HomePage fllInCredentials(String firstname,String lastname,String email,String password, String phone) throws InterruptedException {
+    public void fllInCredentials(String firstname,String lastname,String email,String password, String phone) throws InterruptedException {
         this.firstName.sendKeys(firstname);
         this.lastName.sendKeys(lastname);
         this.password.sendKeys(password);
         this.email.sendKeys(email);
         this.phone.sendKeys(phone);
+    }
+
+    public LoginPage registered() throws InterruptedException {
         registerButton.click();
         Thread.sleep(2000);
-        return new HomePage(driver);
+        return new LoginPage(driver);
     }
 
 }

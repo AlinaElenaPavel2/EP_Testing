@@ -13,6 +13,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 public class RegisterTests {
     private HomePage homePage;
     private RegisterPage registerPage;
+    private LoginPage loginPage;
     private static WebDriver driver;
 
     private static String LAST_NAME = "Pavel";
@@ -23,6 +24,7 @@ public class RegisterTests {
 
     private static String EXISTENT_EMAIL = "alina_pavel98@yahoo.com";
     private static String REGISTER_PAGE_TITLE = "Register";
+    private static String LOGIN_PAGE_TITLE = "Please Log in";
 
 
     @Before
@@ -44,14 +46,7 @@ public class RegisterTests {
     @Test
     public void registerSuccessfully() throws InterruptedException {
         registerPage.fllInCredentials(LAST_NAME, FISRT_NAME, EMAIL, PASSWORD, PHONE);
-        Assert.assertEquals("The register was not succefully!", REGISTER_PAGE_TITLE, registerPage.getTitlePage());
-        //WILL SEE THE NEXT STEPS WHERE REGISTER WILL REDIRECT
-    }
-
-    @Test
-    public void registerUnSuccessfully() throws InterruptedException {
-        registerPage.fllInCredentials(LAST_NAME, FISRT_NAME, EXISTENT_EMAIL, PASSWORD, PHONE);
-        //error in register ----get message
-        Assert.assertEquals("The register was not succefully!", REGISTER_PAGE_TITLE, registerPage.getTitlePage());
+        loginPage=registerPage.registered();
+        Assert.assertEquals("The register was not succefully!", LOGIN_PAGE_TITLE, loginPage.getTitlePage());
     }
 }
